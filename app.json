@@ -1,0 +1,102 @@
+{
+  "expo": {
+    "name": "Expo Template",
+    "slug": "expo-template-app-v3",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "expotemplateapp",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#FEFAE0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "newArchEnabled": true,
+    "jsEngine": "hermes",
+    "ios": {
+      "supportsTablet": false,
+      "backgroundColor": "#FEFAE0",
+      "bundleIdentifier": "com.template.expotemplateapp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "permissions": [
+        "VIBRATE"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#FEFAE0"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.template.expotemplateapp",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "expotemplateapp"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Figtree-Regular.ttf",
+            "./assets/fonts/Figtree-Medium.ttf",
+            "./assets/fonts/Figtree-SemiBold.ttf",
+            "./assets/fonts/Figtree-Bold.ttf",
+            "./assets/fonts/Figtree-ExtraBold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FEFAE0",
+          "image": "./assets/images/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "dark": {
+            "image": "./assets/images/splash.png",
+            "backgroundColor": "#FEFAE0"
+          },
+          "android": {
+            "image": "./assets/images/splash.png",
+            "imageWidth": 200,
+            "resizeMode": "cover",
+            "backgroundColor": "#FEFAE0"
+          },
+          "ios": {
+            "image": "./assets/images/splash.png",
+            "imageWidth": 180,
+            "resizeMode": "contain"
+          }
+        }
+      ],
+      "expo-localization",
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      }
+    }
+  }
+}
