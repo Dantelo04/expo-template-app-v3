@@ -1,8 +1,8 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { SessionProvider, useSession } from "@/context/SessionProvider";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { StatusBar } from "expo-status-bar";
@@ -54,7 +54,23 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const { session } = useSession();
+  const { session, isInitialized } = useSession();
+  const prevSessionRef = useRef<any>(undefined);
+
+  useEffect(() => {
+    if (!isInitialized) return;
+    const prev = prevSessionRef.current;
+    prevSessionRef.current = session;
+
+    // Skip the very first run (initial load — index.tsx handles that redirect)
+    if (prev === undefined) return;
+
+    if (session && !prev) {
+      router.replace("/(tabs)/home");
+    } else if (!session && prev) {
+      router.replace("/sign-in");
+    }
+  }, [session, isInitialized]);
 
   return (
     <>

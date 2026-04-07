@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import { authClient } from "@/lib/auth-client";
 import * as SplashScreen from "expo-splash-screen";
-import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store";
 
@@ -117,9 +116,6 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({
       await authClient.signIn.email(
         { email, password },
         {
-          onSuccess: () => {
-            router.replace("/(tabs)/home");
-          },
           onError: (err) => {
             setError(err?.error?.message || "Failed to sign in");
           },
@@ -160,9 +156,6 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({
       await authClient.signUp.email(
         { email, password, name },
         {
-          onSuccess: () => {
-            router.replace("/(tabs)/home");
-          },
           onError: (err) => {
             setError(err?.error?.message || "Failed to sign up");
           },
@@ -187,9 +180,8 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({
       setUser(null);
       await SecureStore.deleteItemAsync("expotemplateapp_cookie");
       await SecureStore.deleteItemAsync("expotemplateapp_session_data");
-      await AsyncStorage.clear();
+      try { await AsyncStorage.clear(); } catch (_) {}
       setIsLoading(false);
-      router.replace("/sign-in");
     }
   }, []);
 
@@ -204,9 +196,8 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({
       setUser(null);
       await SecureStore.deleteItemAsync("expotemplateapp_cookie");
       await SecureStore.deleteItemAsync("expotemplateapp_session_data");
-      await AsyncStorage.clear();
+      try { await AsyncStorage.clear(); } catch (_) {}
       setIsLoading(false);
-      router.replace("/sign-in");
     }
   }, []);
 
